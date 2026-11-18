@@ -25,6 +25,16 @@
   details { max-width:720px; margin: 10px auto; background:#1a1a1a; border-radius:8px; padding:10px; }
   details input { width:100%; box-sizing:border-box; padding:10px; font-size:1rem; margin:8px 0; background:#000; color:#eee; border:1px solid #444; border-radius:6px; }
   details small { color:#999; display:block; }
+  #collectBox { max-width:720px; margin: 10px auto; text-align:center; }
+  #collectToggle { background:#9b59b6; color:#fff; width:100%; }
+  #collectPanel { background:#1a1a1a; border-radius:8px; padding:10px; margin-top:8px; }
+  #collectCount { font-size:1.2rem; font-weight:bold; margin:6px 0; }
+  #collectLabels { display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap:8px; margin:10px 0; }
+  .label-btn { background:#f39c12; color:#111; padding:18px 8px; font-size:1.05rem; }
+  .label-btn span { display:block; font-size:0.85rem; font-weight:normal; }
+  #collectPanel .row { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  #collectAutoBtn, #collectExportBtn { background:#3b82f6; color:#fff; }
+  .hint { color:#999; font-size:0.9rem; margin:6px 0; }
   #log { max-width:720px; margin: 12px auto; background:#000; padding:10px; border-radius:6px; height:130px; overflow-y:auto; white-space:pre-wrap; font-size:0.85rem; color:#7f7; }
 </style>
 </head>
@@ -54,6 +64,22 @@
   <button id="clearKeyBtn" class="secondary">Apagar chave</button>
 </details>
 
+<section id="collectBox">
+  <button id="collectToggle" aria-pressed="false">Modo coleta (fotos para treinar)</button>
+  <div id="collectPanel" hidden>
+    <p id="collectCount">0 fotos guardadas</p>
+    <p class="hint">Quando passar por algo, toque no botão ou diga o nome. Sem rótulo: <span data-count="sem-rotulo">0</span></p>
+    <div id="collectLabels"></div>
+    <p id="collectVoice" class="hint">Voz: desligada</p>
+    <div class="row">
+      <button id="collectAutoBtn" aria-pressed="true">Foto automática: LIGADA</button>
+      <button id="collectExportBtn">Exportar fotos (.zip)</button>
+      <button id="collectClearBtn" class="secondary">Apagar fotos</button>
+    </div>
+    <p class="hint">As fotos ficam só neste aparelho. Use apenas para o treino: não publique (aparecem rostos e placas).</p>
+  </div>
+</section>
+
 <div id="log"></div>
 
 <script>
@@ -72,5 +98,6 @@
 </script>
 <!-- O COCO-SSD (TensorFlow.js) só é baixado pelo app.js se o YOLO não funcionar no aparelho. -->
 <script src="app.js"></script>
+<script src="coleta.js"></script>
 </body>
 </html>
